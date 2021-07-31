@@ -38,7 +38,7 @@
             <option value="Aswan">Aswan</option>
             <option value="Luxor">Luxor</option>
           </select>
-          <input
+          <!-- <input
             type="button"
             value="Submit"
             class="submit"
@@ -46,7 +46,19 @@
               setCategory('walking');
               addPerson();
             "
-          />
+          /> -->
+          <v-btn
+            type="button"
+            value="Submit"
+            class="submit"
+            :loading="loading[0]"
+            @click="
+              setCategory('walking');
+              addPerson();
+            "
+            color="light-green"
+            >Submit</v-btn
+          >
         </form>
       </button>
       <button class="category">
@@ -86,7 +98,7 @@
             <option value="Aswan">Aswan</option>
             <option value="Luxor">Luxor</option>
           </select>
-          <input
+          <!-- <input
             type="button"
             value="Submit"
             class="submit"
@@ -94,7 +106,19 @@
               setCategory('cycling');
               addPerson();
             "
-          />
+          /> -->
+          <v-btn
+            type="button"
+            value="Submit"
+            class="submit"
+            :loading="loading[1]"
+            @click="
+              setCategory('cycling');
+              addPerson();
+            "
+            color="light-green"
+            >Submit</v-btn
+          >
         </form>
       </button>
       <button class="category">
@@ -134,7 +158,7 @@
             <option value="Aswan">Aswan</option>
             <option value="Luxor">Luxor</option>
           </select>
-          <input
+          <!-- <input
             type="button"
             value="Submit"
             class="submit"
@@ -142,7 +166,19 @@
               setCategory('gym');
               addPerson();
             "
-          />
+          /> -->
+          <v-btn
+            type="button"
+            value="Submit"
+            class="submit"
+            :loading="loading[2]"
+            @click="
+              setCategory('gym');
+              addPerson();
+            "
+            color="light-green"
+            >Submit</v-btn
+          >
         </form>
       </button>
       <button class="category">
@@ -182,7 +218,7 @@
             <option value="Aswan">Aswan</option>
             <option value="Luxor">Luxor</option>
           </select>
-          <input
+          <!-- <input
             type="button"
             value="Submit"
             class="submit"
@@ -190,7 +226,19 @@
               setCategory('esport');
               addPerson();
             "
-          />
+          /> -->
+          <v-btn
+            type="button"
+            value="Submit"
+            class="submit"
+            :loading="loading[3]"
+            @click="
+              setCategory('esport');
+              addPerson();
+            "
+            color="light-green"
+            >Submit</v-btn
+          >
         </form>
       </button>
       <button class="category">
@@ -230,7 +278,7 @@
             <option value="Aswan">Aswan</option>
             <option value="Luxor">Luxor</option>
           </select>
-          <input
+          <!-- <input
             type="button"
             value="Submit"
             class="submit"
@@ -238,7 +286,19 @@
               setCategory('shopping');
               addPerson();
             "
-          />
+          /> -->
+          <v-btn
+            type="button"
+            value="Submit"
+            class="submit"
+            :loading="loading[4]"
+            @click="
+              setCategory('shopping');
+              addPerson();
+            "
+            color="light-green"
+            >Submit</v-btn
+          >
         </form>
       </button>
       <button class="category">
@@ -278,7 +338,7 @@
             <option value="Aswan">Aswan</option>
             <option value="Luxor">Luxor</option>
           </select>
-          <input
+          <!-- <input
             type="button"
             value="Submit"
             class="submit"
@@ -286,7 +346,19 @@
               setCategory('studying');
               addPerson();
             "
-          />
+          /> -->
+          <v-btn
+            type="button"
+            value="Submit"
+            class="submit"
+            :loading="loading[5]"
+            @click="
+              setCategory('studying');
+              addPerson();
+            "
+            color="light-green"
+            >Submit</v-btn
+          >
         </form>
       </button>
     </div>
@@ -322,6 +394,7 @@ export default {
   data() {
     return {
       category: "",
+      loading: [false, false, false, false, false, false],
     };
   },
   methods: {
@@ -334,6 +407,7 @@ export default {
         this.$refs.walkingNameRef.value.length > 0 &&
         this.$refs.walkingPhoneRef.value.length > 0
       ) {
+        this.loading[0] = true;
         const person = {
           name: this.$refs.walkingNameRef.value,
           phone: this.$refs.walkingPhoneRef.value,
@@ -344,12 +418,14 @@ export default {
           .add(person)
           .then(() => {
             console.log("Added a person in the category of walking");
+            this.loading[0] = false;
           });
       } else if (
         this.category == "cycling" &&
         this.$refs.cyclingNameRef.value.length > 0 &&
         this.$refs.cyclingPhoneRef.value.length > 0
       ) {
+        this.loading[1] = true;
         const person = {
           name: this.$refs.cyclingNameRef.value,
           phone: this.$refs.cyclingPhoneRef.value,
@@ -360,12 +436,14 @@ export default {
           .add(person)
           .then(() => {
             console.log("Added a person in the category of cycling");
+            this.loading[1] = false;
           });
       } else if (
         this.category == "gym" &&
         this.$refs.gymNameRef.value.length > 0 &&
         this.$refs.gymPhoneRef.value.length > 0
       ) {
+        this.loading[2] = true;
         const person = {
           name: this.$refs.gymNameRef.value,
           phone: this.$refs.gymPhoneRef.value,
@@ -376,12 +454,14 @@ export default {
           .add(person)
           .then(() => {
             console.log("Added a person in the category of gym");
+            this.loading[2] = false;
           });
       } else if (
         this.category == "esport" &&
         this.$refs.esportNameRef.value.length > 0 &&
         this.$refs.esportPhoneRef.value.length > 0
       ) {
+        this.loading[3] = true;
         const person = {
           name: this.$refs.esportNameRef.value,
           phone: this.$refs.esportPhoneRef.value,
@@ -392,12 +472,14 @@ export default {
           .add(person)
           .then(() => {
             console.log("Added a person in the category of esport");
+            this.loading[3] = false;
           });
       } else if (
         this.category == "shopping" &&
         this.$refs.shoppingNameRef.value.length > 0 &&
         this.$refs.shoppingPhoneRef.value.length > 0
       ) {
+        this.loading[4] = true;
         const person = {
           name: this.$refs.shoppingNameRef.value,
           phone: this.$refs.shoppingPhoneRef.value,
@@ -408,12 +490,14 @@ export default {
           .add(person)
           .then(() => {
             console.log("Added a person in the category of shopping");
+            this.loading[4] = false;
           });
       } else if (
         this.category == "studying" &&
         this.$refs.studyingNameRef.value.length > 0 &&
         this.$refs.studyingPhoneRef.value.length > 0
       ) {
+        this.loading[5] = true;
         const person = {
           name: this.$refs.studyingNameRef.value,
           phone: this.$refs.studyingPhoneRef.value,
@@ -424,6 +508,7 @@ export default {
           .add(person)
           .then(() => {
             console.log("Added a person in the category of studying");
+            this.loading[5] = false;
           });
       }
     },
@@ -449,14 +534,16 @@ export default {
   background: rgb(243, 212, 36);
 }
 #title {
+  min-width: 320px;
   border-bottom: 10px solid #f3f3f3;
   border-radius: 51px;
   padding-bottom: 15px;
   display: inline-block;
   font-size: 5em;
   color: rgb(255, 255, 255);
-  margin-left: auto;
+  margin-left: 40%;
   margin-top: 1px;
+  margin-bottom: 40px;
   font-family: "Yanone Kaffeesatz", cursive;
   text-shadow: 0px 0px 0 rgb(231, 231, 231), 1px 0px 0 rgb(216, 216, 216),
     2px 0px 0 rgb(202, 202, 202), 3px 0px 0 rgb(187, 187, 187),
@@ -480,15 +567,17 @@ export default {
   /* align-items: center; */
 }
 .category {
-  padding: 0.5em;
-  background: rgb(80, 158, 247);
+  padding: 0.8em;
+  background: rgb(75, 154, 245);
   border: solid;
-  border-radius: 20px;
+  border-color: rgb(80, 158, 247);
+  border-radius: 30px;
   width: 47%;
   font-size: 1em;
   margin-left: 1vw;
   margin-right: 1vw;
   margin-bottom: 1vw;
+  cursor: auto;
 }
 /* .category:hover {
   background: rgb(115, 175, 243);
@@ -498,7 +587,8 @@ export default {
   display: inline;
 }
 .sub-title {
-  font-size: 2em;
+  font-size: 2.5em;
+  cursor: auto;
 }
 .text-box {
   height: 30%;
@@ -510,25 +600,31 @@ export default {
   background: rgb(238, 233, 241);
 }
 .gender {
+  padding-left: 8px;
   float: left;
-  height: 30%;
+  height: 28%;
   font-size: 25px;
   border-radius: 20px;
   background: rgb(238, 189, 189);
   margin-right: 1em;
+  cursor: pointer;
 }
 .city {
+  padding-left: 8px;
   max-width: 90%;
   float: left;
   height: 30%;
   font-size: 25px;
   border-radius: 20px;
   background: rgb(210, 157, 241);
+  cursor: pointer;
 }
 .submit {
+  padding: 8px;
   max-width: 70%;
   border-radius: 30px;
-  background: yellowgreen;
+  border-color: yellowgreen;
+  background: rgb(153, 207, 45);
   height: 30%;
   font-size: 25px;
   float: right;
@@ -538,7 +634,9 @@ export default {
   background: rgb(173, 224, 69);
 }
 .results-list {
+  padding: 8px;
   margin-top: 20px;
+  margin-bottom: 20px;
   float: right;
   border-radius: 25px;
   height: 50px;

@@ -6,6 +6,9 @@
         <li>Coffee</li>
         <li>Tea</li>
         <li>Milk</li>
+        <li>orange juice</li>
+        <li>icecream</li>
+        <li>apple juice</li>
       </ul>
     </div>
     <div id="footer">
@@ -61,7 +64,8 @@ export default {
 #title {
   font-size: 5em;
   color: rgb(255, 255, 255);
-  margin-left: auto;
+  margin-left: 40%;
+  margin-bottom: 40px;
   margin-top: 1px;
   font-family: "Yanone Kaffeesatz", cursive;
   text-shadow: 0px 0px 0 rgb(231, 231, 231), 1px 0px 0 rgb(216, 216, 216),
