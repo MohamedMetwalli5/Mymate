@@ -384,6 +384,7 @@
 
 <script>
 import db from "@/fb";
+// import bus from "@/main"; ///////
 export default {
   name: "Home",
   props: {
@@ -522,6 +523,9 @@ export default {
           });
       }
     },
+    // sendCategoryType() {
+    //   bus.$emit("SettingTheCategoryType", this.categoryType);
+    // },
   },
 };
 </script>
@@ -541,6 +545,7 @@ export default {
   min-height: 100%;
   width: 100%;
   min-width: 100%;
+  background-position-x: fixed;
   background: rgb(243, 212, 36);
 }
 #title {
@@ -640,11 +645,13 @@ export default {
 }
 .ActiveUsers {
   padding: 8px;
-  margin-top: 1px;
+  margin-top: -10px;
   margin-bottom: 20px;
+  margin-right: -12px;
   float: right;
-  border-radius: 25px;
-  height: 50px;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+  height: 40px;
   min-width: 10%;
   background: red;
   font-weight: bold;

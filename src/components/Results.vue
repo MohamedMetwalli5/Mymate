@@ -40,10 +40,17 @@
 
 <script>
 import db from "@/fb";
+// import bus from "@/main"; /////////////
+
 export default {
   name: "Results",
   props: {
     msg: String,
+  },
+  data() {
+    return {
+      shownCategory: "studying",
+    };
   },
   methods: {
     renderUsers(doc) {
@@ -102,7 +109,7 @@ export default {
       usersList.appendChild(li);
     },
     getUsersList() {
-      db.collection("gym")
+      db.collection(this.shownCategory)
         .get()
         .then((snapshot) => {
           snapshot.docs.forEach((doc) => {
@@ -111,6 +118,9 @@ export default {
         });
     },
   },
+  // receiveCategoryType() {
+  //   bus.$on("SettingTheCategoryType", (data) => (this.shownCategory = data));
+  // },
   beforeMount() {
     this.getUsersList();
   },
@@ -131,6 +141,7 @@ export default {
   position: absolute;
   min-height: 100%;
   width: 100%;
+  background-position-x: fixed;
   background: rgb(243, 212, 36);
 }
 #title {
