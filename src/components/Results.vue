@@ -2,16 +2,16 @@
   <div id="container">
     <h1 id="title" onclick="window.location.href='/';">Mymate</h1>
     <div id="sub-container">
-      <v-btn
+      <!-- <v-btn
         type="button"
         value="Submit"
         class="submit"
         @click="getUsersList()"
         color="light-black"
         >Get users</v-btn
-      >
+      > -->
       <ul id="users-list" ref="usersListRef">
-        <li class="user">Ahmed</li>
+        <!-- <li class="user">Ahmed</li> -->
       </ul>
     </div>
     <div id="footer">
@@ -52,20 +52,51 @@ export default {
       let phone = document.createElement("span");
       let gender = document.createElement("span");
       let city = document.createElement("span");
+      let button = document.createElement("button");
+
+      //////////////////////////
 
       li.setAttribute("data-id", doc.id);
       name.textContent = doc.data().name;
       phone.textContent = doc.data().phone;
       gender.textContent = doc.data().gender;
       city.textContent = doc.data().city;
+      button.textContent = "Contact";
 
       li.appendChild(name);
       li.appendChild(phone);
       li.appendChild(gender);
       li.appendChild(city);
+      li.appendChild(button);
 
-      // li.style.color = "#FF5733";
-      // li.setAttribute("class", "user");
+      //////////////////////////////////////////////////////// styling the list children
+      li.style.color = "rgb(255, 255, 255)";
+      li.style.fontSize = "25px";
+      li.style.padding = "20px";
+      li.style.background = "rgb(91, 163, 245)";
+      li.style.position = " relative";
+      li.style.borderBottom = "solid";
+      li.style.borderBottomWidth = "1px";
+      li.style.borderBottomColor = "rgb(38, 113, 199)";
+      li.style.height = "100%";
+      li.style.borderRadius = "20px";
+      name.style.display = "block";
+      name.style.color = "#9B03F8";
+      name.style.fontFamily = "'Brush Script MT',cursiv";
+      name.style.fontSize = "45px";
+      phone.style.display = "block";
+      gender.style.display = "block";
+      city.style.display = "inline-block";
+      button.style.background = "#22FBF3";
+      button.style.color = "#F80303";
+      button.style.cssFloat = "right";
+      button.style.minHeight = "100%";
+      button.style.padding = "8px";
+      button.style.borderRadius = "30px";
+      button.style.marginBottom = "10px";
+      button.style.display = "block";
+
+      ///////////////////////////////////////////////////////
       li.className = "user";
       const usersList = this.$refs.usersListRef;
       usersList.appendChild(li);
@@ -79,6 +110,9 @@ export default {
           });
         });
     },
+  },
+  beforeMount() {
+    this.getUsersList();
   },
 };
 </script>
@@ -100,11 +134,16 @@ export default {
   background: rgb(243, 212, 36);
 }
 #title {
+  min-width: 320px;
+  border-bottom: 10px solid #f3f3f3;
+  border-radius: 51px;
+  padding-bottom: 15px;
+  display: inline-block;
   font-size: 5em;
   color: rgb(255, 255, 255);
   margin-left: 40%;
-  margin-bottom: 40px;
   margin-top: 1px;
+  margin-bottom: 40px;
   font-family: "Yanone Kaffeesatz", cursive;
   text-shadow: 0px 0px 0 rgb(231, 231, 231), 1px 0px 0 rgb(216, 216, 216),
     2px 0px 0 rgb(202, 202, 202), 3px 0px 0 rgb(187, 187, 187),
@@ -113,11 +152,6 @@ export default {
     7px 0px 1px rgba(0, 0, 0, 0.5), 0px 0px 6px rgba(0, 0, 0, 0.2);
   z-index: 11;
   top: 0;
-  -webkit-animation: jump 2s infinite;
-  -moz-animation: jump 2s infinite;
-  -o-animation: jump 2s infinite;
-  -ms-animation: jump 2s infinite;
-  animation: jump 2s infinite;
   cursor: pointer;
 }
 #sub-comtainer {
@@ -137,11 +171,11 @@ ul {
 .user {
   padding: 20px;
   background: rgb(91, 163, 245);
-  font-size: 20px;
+  font-size: 25px;
   color: rgb(255, 255, 255);
   position: relative;
-  border-bottom: 1px solid rgb(80, 158, 247);
-  height: 300px;
+  border-bottom: 1px solid rgb(38, 113, 199);
+  height: 100%;
   border-radius: 20px;
 }
 
@@ -155,20 +189,8 @@ li .user span {
 }
 
 li .user span:nth-child(2) {
-  font-size: 16px;
+  font-size: 25px;
   margin-top: 6px;
   color: #999;
-}
-
-li .user div {
-  position: absolute;
-  top: 0;
-  right: 0px;
-  background: rgba(255, 255, 255, 0.6);
-  width: 40px;
-  text-align: center;
-  padding: 10px 0;
-  font-weight: bold;
-  cursor: pointer;
 }
 </style>

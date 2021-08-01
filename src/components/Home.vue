@@ -3,8 +3,8 @@
     <h1 id="title" onclick="window.location.href='/';">Mymate</h1>
     <div id="sub-container">
       <button class="category">
-        <button class="results-list" onclick="window.location.href='/results';">
-          Show results
+        <button class="ActiveUsers">
+          {{ walkingNumberOfActiveUsers }} Online
         </button>
         <h1 class="sub-title">Walking 🚶</h1>
         <form class="form" id="add-walking-form">
@@ -62,8 +62,8 @@
         </form>
       </button>
       <button class="category">
-        <button class="results-list" onclick="window.location.href='/results';">
-          Show results
+        <button class="ActiveUsers">
+          {{ cyclingNumberOfActiveUsers }} Online
         </button>
         <h1 class="sub-title">Cycling 🚴</h1>
         <form class="form" id="add-cycling-form">
@@ -122,9 +122,7 @@
         </form>
       </button>
       <button class="category">
-        <button class="results-list" onclick="window.location.href='/results';">
-          Show results
-        </button>
+        <button class="ActiveUsers">{{ gymNumberOfActiveUsers }} Online</button>
         <h1 class="sub-title">Gym 🏋️</h1>
         <form class="form" id="add-gym-form">
           <input
@@ -182,8 +180,8 @@
         </form>
       </button>
       <button class="category">
-        <button class="results-list" onclick="window.location.href='/results';">
-          Show results
+        <button class="ActiveUsers">
+          {{ esportNumberOfActiveUsers }} Online
         </button>
         <h1 class="sub-title">Esport 🎮</h1>
         <form class="form" id="add-esport-form">
@@ -242,8 +240,8 @@
         </form>
       </button>
       <button class="category">
-        <button class="results-list" onclick="window.location.href='/results';">
-          Show results
+        <button class="ActiveUsers">
+          {{ shoppingNumberOfActiveUsers }} Online
         </button>
         <h1 class="sub-title">Shopping 🛍️</h1>
         <form class="form" id="add-shopping-form">
@@ -302,8 +300,8 @@
         </form>
       </button>
       <button class="category">
-        <button class="results-list" onclick="window.location.href='/results';">
-          Show results
+        <button class="ActiveUsers">
+          {{ studyingNumberOfActiveUsers }} Online
         </button>
         <h1 class="sub-title">Studying 📚</h1>
         <form class="form" id="add-studying-form">
@@ -394,6 +392,12 @@ export default {
   data() {
     return {
       category: "",
+      walkingNumberOfActiveUsers: 0,
+      cyclingNumberOfActiveUsers: 0,
+      gymNumberOfActiveUsers: 0,
+      esportNumberOfActiveUsers: 0,
+      shoppingNumberOfActiveUsers: 0,
+      studyingNumberOfActiveUsers: 0,
       loading: [false, false, false, false, false, false],
     };
   },
@@ -419,6 +423,7 @@ export default {
           .then(() => {
             console.log("Added a person in the category of walking");
             this.loading[0] = false;
+            window.location.href = "/results";
           });
       } else if (
         this.category == "cycling" &&
@@ -437,6 +442,7 @@ export default {
           .then(() => {
             console.log("Added a person in the category of cycling");
             this.loading[1] = false;
+            window.location.href = "/results";
           });
       } else if (
         this.category == "gym" &&
@@ -455,6 +461,7 @@ export default {
           .then(() => {
             console.log("Added a person in the category of gym");
             this.loading[2] = false;
+            window.location.href = "/results";
           });
       } else if (
         this.category == "esport" &&
@@ -473,6 +480,7 @@ export default {
           .then(() => {
             console.log("Added a person in the category of esport");
             this.loading[3] = false;
+            window.location.href = "/results";
           });
       } else if (
         this.category == "shopping" &&
@@ -491,6 +499,7 @@ export default {
           .then(() => {
             console.log("Added a person in the category of shopping");
             this.loading[4] = false;
+            window.location.href = "/results";
           });
       } else if (
         this.category == "studying" &&
@@ -509,6 +518,7 @@ export default {
           .then(() => {
             console.log("Added a person in the category of studying");
             this.loading[5] = false;
+            window.location.href = "/results";
           });
       }
     },
@@ -552,11 +562,6 @@ export default {
     7px 0px 1px rgba(0, 0, 0, 0.5), 0px 0px 6px rgba(0, 0, 0, 0.2);
   z-index: 11;
   top: 0;
-  -webkit-animation: jump 2s infinite;
-  -moz-animation: jump 2s infinite;
-  -o-animation: jump 2s infinite;
-  -ms-animation: jump 2s infinite;
-  animation: jump 2s infinite;
   cursor: pointer;
 }
 #sub-comtainer {
@@ -592,7 +597,7 @@ export default {
 }
 .text-box {
   height: 30%;
-  width: 30%;
+  width: 33%;
   float: left;
   border-radius: 25px;
   margin-right: 1em;
@@ -633,19 +638,17 @@ export default {
 .submit:hover {
   background: rgb(173, 224, 69);
 }
-.results-list {
+.ActiveUsers {
   padding: 8px;
-  margin-top: 20px;
+  margin-top: 1px;
   margin-bottom: 20px;
   float: right;
   border-radius: 25px;
   height: 50px;
+  min-width: 10%;
   background: red;
   font-weight: bold;
   font-size: 1em;
-  cursor: pointer;
-}
-.results-list:hover {
-  background: rgb(212, 65, 65);
+  cursor: default;
 }
 </style>
