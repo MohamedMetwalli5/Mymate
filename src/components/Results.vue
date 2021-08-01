@@ -2,13 +2,16 @@
   <div id="container">
     <h1 id="title" onclick="window.location.href='/';">Mymate</h1>
     <div id="sub-container">
-      <ul id="list">
-        <li>Coffee</li>
-        <li>Tea</li>
-        <li>Milk</li>
-        <li>orange juice</li>
-        <li>icecream</li>
-        <li>apple juice</li>
+      <v-btn
+        type="button"
+        value="Submit"
+        class="submit"
+        @click="getUsersList()"
+        color="light-black"
+        >Get users</v-btn
+      >
+      <ul id="users-list" ref="usersListRef">
+        <li class="user">Ahmed</li>
       </ul>
     </div>
     <div id="footer">
@@ -36,11 +39,46 @@
 </template>
 
 <script>
-// import db from "@/fb";
+import db from "@/fb";
 export default {
   name: "Results",
   props: {
     msg: String,
+  },
+  methods: {
+    renderUsers(doc) {
+      let li = document.createElement("li");
+      let name = document.createElement("span");
+      let phone = document.createElement("span");
+      let gender = document.createElement("span");
+      let city = document.createElement("span");
+
+      li.setAttribute("data-id", doc.id);
+      name.textContent = doc.data().name;
+      phone.textContent = doc.data().phone;
+      gender.textContent = doc.data().gender;
+      city.textContent = doc.data().city;
+
+      li.appendChild(name);
+      li.appendChild(phone);
+      li.appendChild(gender);
+      li.appendChild(city);
+
+      // li.style.color = "#FF5733";
+      // li.setAttribute("class", "user");
+      li.className = "user";
+      const usersList = this.$refs.usersListRef;
+      usersList.appendChild(li);
+    },
+    getUsersList() {
+      db.collection("gym")
+        .get()
+        .then((snapshot) => {
+          snapshot.docs.forEach((doc) => {
+            this.renderUsers(doc);
+          });
+        });
+    },
   },
 };
 </script>
@@ -89,19 +127,48 @@ export default {
   /* justify-content: center; */
   /* align-items: center; */
 }
-#list {
-  background: rgb(94, 133, 243);
+
+ul {
   list-style-type: none;
-  border-radius: 30px;
-  min-width: 80%;
-  width: 80%;
-  margin: auto;
+  padding: 40px;
+  border-radius: 25px;
 }
-li {
-  height: 50px;
-  width: 70%;
-  margin: auto;
-  color: rgb(0, 0, 0);
-  font-size: 2em;
+
+.user {
+  padding: 20px;
+  background: rgb(91, 163, 245);
+  font-size: 20px;
+  color: rgb(255, 255, 255);
+  position: relative;
+  border-bottom: 1px solid rgb(80, 158, 247);
+  height: 300px;
+  border-radius: 20px;
+}
+
+li:nth-child(even) {
+  padding: 20px;
+  background: rgb(71, 149, 238);
+}
+
+li .user span {
+  display: block;
+}
+
+li .user span:nth-child(2) {
+  font-size: 16px;
+  margin-top: 6px;
+  color: #999;
+}
+
+li .user div {
+  position: absolute;
+  top: 0;
+  right: 0px;
+  background: rgba(255, 255, 255, 0.6);
+  width: 40px;
+  text-align: center;
+  padding: 10px 0;
+  font-weight: bold;
+  cursor: pointer;
 }
 </style>
