@@ -10,9 +10,23 @@
         color="light-black"
         >Get users</v-btn
       > -->
-      <ul id="users-list" ref="usersListRef">
-        <!-- <li class="user">Ahmed</li> -->
-      </ul>
+      <div id="sorting-filtering-bar">
+        <select class="sorting-filtering-box" name="sorting">
+          <option value="" @click="setSortingOption('')">Sort 🔻</option>
+          <option value="name-sorting" @click="setSortingOption('name')">
+            name
+          </option>
+          <option value="age-sorting" @click="setSortingOption('age')">
+            age
+          </option>
+        </select>
+        <select class="sorting-filtering-box" name="filtering">
+          <option value="">Filter 🔻</option>
+          <option value="gender-filtering">gender</option>
+          <option value="city-filtering">city</option>
+        </select>
+      </div>
+      <ul id="users-list" ref="usersListRef" v-if="flag"></ul>
     </div>
     <div id="footer">
       <img
@@ -50,28 +64,44 @@ export default {
   data() {
     return {
       shownCategory: "studying",
+      sortingOption: "",
+      filteringOption: "",
+      flag: true,
     };
   },
   methods: {
+    setSortingOption(value) {
+      this.sortingOption = value;
+      console.log("this.sortingOption");
+    },
+    setFilteringOption(value) {
+      this.filteringOption = value;
+    },
     renderUsers(doc) {
       let li = document.createElement("li");
       let name = document.createElement("span");
       let phone = document.createElement("span");
+      let age = document.createElement("span");
       let gender = document.createElement("span");
       let city = document.createElement("span");
       let button = document.createElement("button");
 
-      //////////////////////////
-
       li.setAttribute("data-id", doc.id);
       name.textContent = doc.data().name;
-      phone.textContent = doc.data().phone;
-      gender.textContent = doc.data().gender;
-      city.textContent = doc.data().city;
+      phone.textContent = "📞 " + doc.data().phone;
+      age.textContent = "🎂 " + doc.data().age;
+      let genderCheck = doc.data().gender;
+      if (genderCheck == "Male") {
+        gender.textContent = "👨 " + doc.data().gender;
+      } else {
+        gender.textContent = "👩 " + doc.data().gender;
+      }
+      city.textContent = "📍 " + doc.data().city + ", Egypt";
       button.textContent = "Contact";
 
       li.appendChild(name);
       li.appendChild(phone);
+      li.appendChild(age);
       li.appendChild(gender);
       li.appendChild(city);
       li.appendChild(button);
@@ -90,7 +120,7 @@ export default {
       name.style.display = "block";
       name.style.color = "#9B03F8";
       name.style.fontFamily = "'Brush Script MT',cursiv";
-      name.style.fontSize = "45px";
+      name.style.fontSize = "50px";
       phone.style.display = "block";
       gender.style.display = "block";
       city.style.display = "inline-block";
@@ -109,13 +139,26 @@ export default {
       usersList.appendChild(li);
     },
     getUsersList() {
-      db.collection(this.shownCategory)
-        .get()
-        .then((snapshot) => {
-          snapshot.docs.forEach((doc) => {
-            this.renderUsers(doc);
+      if (this.sortingOption == "" && this.filteringOption == "") {
+        db.collection(this.shownCategory)
+          .get()
+          .then((snapshot) => {
+            snapshot.docs.forEach((doc) => {
+              this.renderUsers(doc);
+            });
           });
-        });
+      } else if (this.sortingOption == "name" || this.sortingOption == "age") {
+        // this.flag = false;
+        db.collection(this.shownCategory)
+          .orderBy(this.sortingOption)
+          .get()
+          .then((snapshot) => {
+            snapshot.docs.forEach((doc) => {
+              this.renderUsers(doc);
+            });
+          });
+        // this.flag = true;
+      }
     },
   },
   // receiveCategoryType() {
@@ -203,5 +246,30 @@ li .user span:nth-child(2) {
   font-size: 25px;
   margin-top: 6px;
   color: #999;
+}
+
+#sorting-filtering-bar {
+  margin: auto;
+  padding: 20px;
+  background: rgb(34, 206, 0);
+  font-size: 25px;
+  color: rgb(255, 255, 255);
+  position: relative;
+  border-bottom: 1px solid rgb(38, 113, 199);
+  height: 100%;
+  width: 90%;
+  border-radius: 20px;
+}
+.sorting-filtering-box {
+  background: rgb(245, 166, 75);
+  width: 120px;
+  min-height: 100%;
+  border-radius: 30px;
+  padding: 10px;
+  margin-right: 120px;
+  cursor: pointer;
+}
+.sorting-filtering-box:hover {
+  background: rgb(245, 178, 102);
 }
 </style>

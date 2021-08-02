@@ -3,7 +3,7 @@
     <h1 id="title" onclick="window.location.href='/';">Mymate</h1>
     <div id="sub-container">
       <button class="category">
-        <button class="ActiveUsers">
+        <button class="ActiveUsers" @click="countOnlineUsers('walking')">
           {{ walkingNumberOfActiveUsers }} Online
         </button>
         <h1 class="sub-title">Walking 🚶</h1>
@@ -26,6 +26,13 @@
             placeholder=" Enter your phone number"
             required="true"
           />
+          <select class="age" name="age" ref="walkingAgeRef">
+            <option value="15">&lt; 16</option>
+            <option value="16-20">16-20</option>
+            <option value="21-28">21-28</option>
+            <option value="29-35">29-35</option>
+            <option value="36">&gt; 35</option>
+          </select>
           <select class="gender" name="gender" ref="walkingGenderRef">
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -62,7 +69,7 @@
         </form>
       </button>
       <button class="category">
-        <button class="ActiveUsers">
+        <button class="ActiveUsers" @click="countOnlineUsers('cycling')">
           {{ cyclingNumberOfActiveUsers }} Online
         </button>
         <h1 class="sub-title">Cycling 🚴</h1>
@@ -86,6 +93,13 @@
             placeholder=" Enter your phone number"
             required
           />
+          <select class="age" name="age" ref="cyclingAgeRef">
+            <option value="15">&lt; 16</option>
+            <option value="16-20">16-20</option>
+            <option value="21-28">21-28</option>
+            <option value="29-35">29-35</option>
+            <option value="36">&gt; 35</option>
+          </select>
           <select class="gender" name="gender" ref="cyclingGenderRef">
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -122,7 +136,9 @@
         </form>
       </button>
       <button class="category">
-        <button class="ActiveUsers">{{ gymNumberOfActiveUsers }} Online</button>
+        <button class="ActiveUsers" @click="countOnlineUsers('gym')">
+          {{ gymNumberOfActiveUsers }} Online
+        </button>
         <h1 class="sub-title">Gym 🏋️</h1>
         <form class="form" id="add-gym-form">
           <input
@@ -144,6 +160,13 @@
             placeholder=" Enter your phone number"
             required
           />
+          <select class="age" name="age" ref="gymAgeRef">
+            <option value="15">&lt; 16</option>
+            <option value="16-20">16-20</option>
+            <option value="21-28">21-28</option>
+            <option value="29-35">29-35</option>
+            <option value="36">&gt; 35</option>
+          </select>
           <select class="gender" name="gender" ref="gymGenderRef">
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -180,7 +203,7 @@
         </form>
       </button>
       <button class="category">
-        <button class="ActiveUsers">
+        <button class="ActiveUsers" @click="countOnlineUsers('esport')">
           {{ esportNumberOfActiveUsers }} Online
         </button>
         <h1 class="sub-title">Esport 🎮</h1>
@@ -204,6 +227,13 @@
             placeholder=" Enter your phone number"
             required
           />
+          <select class="age" name="age" ref="esportAgeRef">
+            <option value="15">&lt; 16</option>
+            <option value="16-20">16-20</option>
+            <option value="21-28">21-28</option>
+            <option value="29-35">29-35</option>
+            <option value="36">&gt; 35</option>
+          </select>
           <select class="gender" name="gender" ref="esportGenderRef">
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -240,7 +270,7 @@
         </form>
       </button>
       <button class="category">
-        <button class="ActiveUsers">
+        <button class="ActiveUsers" @click="countOnlineUsers('shopping')">
           {{ shoppingNumberOfActiveUsers }} Online
         </button>
         <h1 class="sub-title">Shopping 🛍️</h1>
@@ -264,6 +294,13 @@
             placeholder=" Enter your phone number"
             required
           />
+          <select class="age" name="age" ref="shoppingAgeRef">
+            <option value="15">&lt; 16</option>
+            <option value="16-20">16-20</option>
+            <option value="21-28">21-28</option>
+            <option value="29-35">29-35</option>
+            <option value="36">&gt; 35</option>
+          </select>
           <select class="gender" name="gender" ref="shoppingGenderRef">
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -300,7 +337,7 @@
         </form>
       </button>
       <button class="category">
-        <button class="ActiveUsers">
+        <button class="ActiveUsers" @click="countOnlineUsers('studying')">
           {{ studyingNumberOfActiveUsers }} Online
         </button>
         <h1 class="sub-title">Studying 📚</h1>
@@ -324,6 +361,13 @@
             placeholder=" Enter your phone number"
             required
           />
+          <select class="age" name="age" ref="studyingAgeRef">
+            <option value="15">&lt; 16</option>
+            <option value="16-20">16-20</option>
+            <option value="21-28">21-28</option>
+            <option value="29-35">29-35</option>
+            <option value="35">&gt; 35</option>
+          </select>
           <select class="gender" name="gender" ref="studyingGenderRef">
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -400,6 +444,14 @@ export default {
       shoppingNumberOfActiveUsers: 0,
       studyingNumberOfActiveUsers: 0,
       loading: [false, false, false, false, false, false],
+      categories: [
+        "walking",
+        "cycling",
+        "gym",
+        "esport",
+        "shopping",
+        "studying",
+      ],
     };
   },
   methods: {
@@ -416,6 +468,7 @@ export default {
         const person = {
           name: this.$refs.walkingNameRef.value,
           phone: this.$refs.walkingPhoneRef.value,
+          age: this.$refs.walkingAgeRef.value,
           gender: this.$refs.walkingGenderRef.value,
           city: this.$refs.walkingCityRef.value,
         };
@@ -435,6 +488,7 @@ export default {
         const person = {
           name: this.$refs.cyclingNameRef.value,
           phone: this.$refs.cyclingPhoneRef.value,
+          age: this.$refs.cyclingAgeRef.value,
           gender: this.$refs.cyclingGenderRef.value,
           city: this.$refs.cyclingCityRef.value,
         };
@@ -454,6 +508,7 @@ export default {
         const person = {
           name: this.$refs.gymNameRef.value,
           phone: this.$refs.gymPhoneRef.value,
+          age: this.$refs.gymAgeRef.value,
           gender: this.$refs.gymGenderRef.value,
           city: this.$refs.gymCityRef.value,
         };
@@ -473,6 +528,7 @@ export default {
         const person = {
           name: this.$refs.esportNameRef.value,
           phone: this.$refs.esportPhoneRef.value,
+          age: this.$refs.esportAgeRef.value,
           gender: this.$refs.esportGenderRef.value,
           city: this.$refs.esportCityRef.value,
         };
@@ -492,6 +548,7 @@ export default {
         const person = {
           name: this.$refs.shoppingNameRef.value,
           phone: this.$refs.shoppingPhoneRef.value,
+          age: this.$refs.shoppingAgeRef.value,
           gender: this.$refs.shoppingGenderRef.value,
           city: this.$refs.shoppingCityRef.value,
         };
@@ -511,6 +568,7 @@ export default {
         const person = {
           name: this.$refs.studyingNameRef.value,
           phone: this.$refs.studyingPhoneRef.value,
+          age: this.$refs.studyingAgeRef.value,
           gender: this.$refs.studyingGenderRef.value,
           city: this.$refs.studyingCityRef.value,
         };
@@ -523,9 +581,59 @@ export default {
           });
       }
     },
-    // sendCategoryType() {
-    //   bus.$emit("SettingTheCategoryType", this.categoryType);
-    // },
+    countOnlineUsers(category) {
+      if (category == "walking") {
+        db.collection(category)
+          .get()
+          .then((snap) => {
+            this.walkingNumberOfActiveUsers = snap.size; // will return the collection size
+            console.log(this.walkingNumberOfActiveUsers);
+          });
+      } else if (category == "cycling") {
+        db.collection(category)
+          .get()
+          .then((snap) => {
+            this.cyclingNumberOfActiveUsers = snap.size; // will return the collection size
+            console.log(this.cyclingNumberOfActiveUsers);
+          });
+      } else if (category == "gym") {
+        db.collection(category)
+          .get()
+          .then((snap) => {
+            this.gymNumberOfActiveUsers = snap.size; // will return the collection size
+            console.log(this.gymNumberOfActiveUsers);
+          });
+      } else if (category == "esport") {
+        db.collection(category)
+          .get()
+          .then((snap) => {
+            this.esportNumberOfActiveUsers = snap.size; // will return the collection size
+            console.log(this.esportNumberOfActiveUsers);
+          });
+      } else if (category == "shopping") {
+        db.collection(category)
+          .get()
+          .then((snap) => {
+            this.shoppingNumberOfActiveUsers = snap.size; // will return the collection size
+            console.log(this.shoppingNumberOfActiveUsers);
+          });
+      } else if (category == "studying") {
+        db.collection(category)
+          .get()
+          .then((snap) => {
+            this.studyingNumberOfActiveUsers = snap.size; // will return the collection size
+            console.log(this.studyingNumberOfActiveUsers);
+          });
+      }
+    },
+    mounted() {
+      this.$nextTick(function () {
+        this.countOnlineUsers("walking");
+
+        // Code that will run only after the
+        // entire view has been rendered
+      });
+    },
   },
 };
 </script>
@@ -608,6 +716,16 @@ export default {
   margin-right: 1em;
   font-size: 1.5em;
   background: rgb(238, 233, 241);
+}
+.age {
+  padding-left: 8px;
+  float: left;
+  height: 28%;
+  font-size: 25px;
+  border-radius: 20px;
+  background: rgb(198, 12, 245);
+  margin-right: 3em;
+  cursor: pointer;
 }
 .gender {
   padding-left: 8px;
