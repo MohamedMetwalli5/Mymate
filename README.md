@@ -5,6 +5,7 @@
 ## About the project
 
 This is "Mymate" website project 💻.
+I used Vue.js, Vuetify, Firebase and of course Html 5 , CSS 3, JavaScript.
 
 <p align="center">
   <a href="" target="_blank">
