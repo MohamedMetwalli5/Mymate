@@ -1,5 +1,6 @@
 ![Language](https://img.shields.io/badge/language-Vue.js%20-green.svg)
 # mymate
+## About the project
 This is "Mymate" website project.
 <p align="center">
   <a href="" target="_blank">
