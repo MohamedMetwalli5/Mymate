@@ -3,7 +3,7 @@
     <h1 id="title" onclick="window.location.href='/';">Mymate</h1>
     <div id="sub-container">
       <button class="category">
-        <button class="ActiveUsers" @click="countOnlineUsers('walking')">
+        <button class="ActiveUsers" ref="myBtn">
           {{ walkingNumberOfActiveUsers }} Online
         </button>
         <h1 class="sub-title">Walking 🚶</h1>
@@ -69,7 +69,7 @@
         </form>
       </button>
       <button class="category">
-        <button class="ActiveUsers" @click="countOnlineUsers('cycling')">
+        <button class="ActiveUsers">
           {{ cyclingNumberOfActiveUsers }} Online
         </button>
         <h1 class="sub-title">Cycling 🚴</h1>
@@ -136,9 +136,7 @@
         </form>
       </button>
       <button class="category">
-        <button class="ActiveUsers" @click="countOnlineUsers('gym')">
-          {{ gymNumberOfActiveUsers }} Online
-        </button>
+        <button class="ActiveUsers">{{ gymNumberOfActiveUsers }} Online</button>
         <h1 class="sub-title">Gym 🏋️</h1>
         <form class="form" id="add-gym-form">
           <input
@@ -203,7 +201,7 @@
         </form>
       </button>
       <button class="category">
-        <button class="ActiveUsers" @click="countOnlineUsers('esport')">
+        <button class="ActiveUsers">
           {{ esportNumberOfActiveUsers }} Online
         </button>
         <h1 class="sub-title">Esport 🎮</h1>
@@ -270,7 +268,7 @@
         </form>
       </button>
       <button class="category">
-        <button class="ActiveUsers" @click="countOnlineUsers('shopping')">
+        <button class="ActiveUsers">
           {{ shoppingNumberOfActiveUsers }} Online
         </button>
         <h1 class="sub-title">Shopping 🛍️</h1>
@@ -337,7 +335,7 @@
         </form>
       </button>
       <button class="category">
-        <button class="ActiveUsers" @click="countOnlineUsers('studying')">
+        <button class="ActiveUsers">
           {{ studyingNumberOfActiveUsers }} Online
         </button>
         <h1 class="sub-title">Studying 📚</h1>
@@ -587,53 +585,47 @@ export default {
           .get()
           .then((snap) => {
             this.walkingNumberOfActiveUsers = snap.size; // will return the collection size
-            console.log(this.walkingNumberOfActiveUsers);
           });
       } else if (category == "cycling") {
         db.collection(category)
           .get()
           .then((snap) => {
             this.cyclingNumberOfActiveUsers = snap.size; // will return the collection size
-            console.log(this.cyclingNumberOfActiveUsers);
           });
       } else if (category == "gym") {
         db.collection(category)
           .get()
           .then((snap) => {
             this.gymNumberOfActiveUsers = snap.size; // will return the collection size
-            console.log(this.gymNumberOfActiveUsers);
           });
       } else if (category == "esport") {
         db.collection(category)
           .get()
           .then((snap) => {
             this.esportNumberOfActiveUsers = snap.size; // will return the collection size
-            console.log(this.esportNumberOfActiveUsers);
           });
       } else if (category == "shopping") {
         db.collection(category)
           .get()
           .then((snap) => {
             this.shoppingNumberOfActiveUsers = snap.size; // will return the collection size
-            console.log(this.shoppingNumberOfActiveUsers);
           });
       } else if (category == "studying") {
         db.collection(category)
           .get()
           .then((snap) => {
             this.studyingNumberOfActiveUsers = snap.size; // will return the collection size
-            console.log(this.studyingNumberOfActiveUsers);
           });
       }
     },
-    mounted() {
-      this.$nextTick(function () {
-        this.countOnlineUsers("walking");
-
-        // Code that will run only after the
-        // entire view has been rendered
-      });
-    },
+  },
+  mounted() {
+    this.countOnlineUsers("walking");
+    this.countOnlineUsers("cycling");
+    this.countOnlineUsers("gym");
+    this.countOnlineUsers("esport");
+    this.countOnlineUsers("shopping");
+    this.countOnlineUsers("studying");
   },
 };
 </script>

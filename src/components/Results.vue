@@ -2,14 +2,6 @@
   <div id="container">
     <h1 id="title" onclick="window.location.href='/';">Mymate</h1>
     <div id="sub-container">
-      <!-- <v-btn
-        type="button"
-        value="Submit"
-        class="submit"
-        @click="getUsersList()"
-        color="light-black"
-        >Get users</v-btn
-      > -->
       <div id="sorting-filtering-bar">
         <select class="sorting-filtering-box" name="sorting">
           <option value="" @click="setSortingOption('')">Sort 🔻</option>
@@ -26,7 +18,7 @@
           <option value="city-filtering">city</option>
         </select>
       </div>
-      <ul id="users-list" ref="usersListRef" v-if="flag"></ul>
+      <ul id="users-list" ref="usersListRef"></ul>
     </div>
     <div id="footer">
       <img
@@ -54,7 +46,6 @@
 
 <script>
 import db from "@/fb";
-// import bus from "@/main"; /////////////
 
 export default {
   name: "Results",
@@ -66,7 +57,6 @@ export default {
       shownCategory: "studying",
       sortingOption: "",
       filteringOption: "",
-      flag: true,
     };
   },
   methods: {
@@ -85,6 +75,20 @@ export default {
       let gender = document.createElement("span");
       let city = document.createElement("span");
       let button = document.createElement("button");
+      let a = document.createElement("a");
+
+      let linkText = document.createTextNode("Contact 💬");
+      a.appendChild(linkText);
+      a.style.color = "#000000";
+      a.style.textDecoration = "none";
+      a.href =
+        "https://api.whatsapp.com/send?phone=" +
+        doc.data().phone +
+        "&text=" +
+        "Hi, do you want to contact for the " +
+        this.shownCategory +
+        " mate ?";
+      document.body.appendChild(a);
 
       li.setAttribute("data-id", doc.id);
       name.textContent = doc.data().name;
@@ -97,8 +101,9 @@ export default {
         gender.textContent = "👩 " + doc.data().gender;
       }
       city.textContent = "📍 " + doc.data().city + ", Egypt";
-      button.textContent = "Contact";
+      button.textContent = "";
 
+      button.appendChild(a);
       li.appendChild(name);
       li.appendChild(phone);
       li.appendChild(age);
@@ -148,7 +153,6 @@ export default {
             });
           });
       } else if (this.sortingOption == "name" || this.sortingOption == "age") {
-        // this.flag = false;
         db.collection(this.shownCategory)
           .orderBy(this.sortingOption)
           .get()
@@ -157,13 +161,9 @@ export default {
               this.renderUsers(doc);
             });
           });
-        // this.flag = true;
       }
     },
   },
-  // receiveCategoryType() {
-  //   bus.$on("SettingTheCategoryType", (data) => (this.shownCategory = data));
-  // },
   beforeMount() {
     this.getUsersList();
   },
