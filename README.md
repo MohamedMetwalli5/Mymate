@@ -1,4 +1,4 @@
-![Framework](https://img.shields.io/badge/language-Vue.js%20-green.svg)
+![Framework](https://img.shields.io/badge/Framework-Vue.js%20-green.svg)
 # Mymate
 ## About the project
 This is "Mymate" website project.
