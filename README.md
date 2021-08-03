@@ -1,4 +1,5 @@
 ![Framework](https://img.shields.io/badge/Framework-Vue.js%20-green.svg)
+![Database](https://img.shields.io/badge/Database-Firebase%20-orange.svg)
 
 # Mymate
 
