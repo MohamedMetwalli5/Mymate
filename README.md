@@ -1,6 +1,5 @@
 ![Framework](https://img.shields.io/badge/Framework-Vue.js%20-green.svg)
 ![Database](https://img.shields.io/badge/Database-Firebase%20-orange.svg)
-![npm](https://img.shields.io/npm/v/vue-awesome-swiper?color=c7343a&label=npm&style=for-the-badge)
 ![npm](https://img.shields.io/badge/npm%-7.0.10-42a97a?style=for-the-badge&labelColor=35495d)
 
 # Mymate
