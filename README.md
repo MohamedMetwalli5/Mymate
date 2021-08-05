@@ -2,6 +2,7 @@
 ![Vuetify](https://img.shields.io/badge/Vuetify-2.4.0%20-blue.svg)
 ![Database](https://img.shields.io/badge/Database-Firebase%20-orange.svg)
 ![npm](https://img.shields.io/badge/npm-7.0.10%20-red.svg)
+![License](https://img.shields.io/badge/License-GPL&ndash;3.0%20-purple.svg)
 # Mymate
 
 ## About the project
