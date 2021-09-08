@@ -8,6 +8,7 @@
 ## About the project
 
 This is "Mymate" website project 💻.
+<br>
 I used Vue.js, Vuetify, Firebase and of course Html 5 , CSS 3, JavaScript.
 
 <p align="center">
